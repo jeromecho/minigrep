@@ -4,6 +4,7 @@ CLI tool that mimics grep (*g*lobally search for a *r*egular *e*xpression and *p
 
 * Check **production** branch for polished and uncommented code
 
+<img width="817" alt="image" src="https://user-images.githubusercontent.com/71617542/187562209-a3c34be7-15ba-4e54-bb49-6ab65dca4ed2.png">
 
 ## Using the CLI Tool 
 
