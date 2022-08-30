@@ -1,2 +1,3 @@
 # minigrep
-jeromecho/Rust-CLI-Program 
+
+CLI tool that mimics grep behaviour. Made with Rust. 
