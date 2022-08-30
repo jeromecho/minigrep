@@ -81,7 +81,6 @@ pub struct Config {
 impl Config {
      pub fn build(args: &[String]) -> Result<Config, &'static str> {
         if args.len() < 3 {
-            // give a user-friendly error message
             return Err("not enough arguments");
         }
         let query = args[1].clone();
