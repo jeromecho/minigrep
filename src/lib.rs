@@ -79,22 +79,32 @@ pub struct Config {
 }
 
 impl Config {
-     pub fn build(args: &[String]) -> Result<Config, &'static str> {
-        if args.len() < 3 {
-            return Err("not enough arguments");
-        }
-        let query = args[1].clone();
-        let file_path = args[2].clone();
-        let mut ignore_case = env::var("IGNORE_CASE").is_ok();
-        
-        if args.len() == 4 {
-            let ignore_case_arg = args[3].clone();
+    pub fn build(
+        mut args: impl Iterator<Item = String>,
+    ) -> Result<Config, &'static str> {
+        args.next();
 
-            if (ignore_case_arg == "true") {
-                ignore_case = true;
-            } else {
-                ignore_case = false;
-            }
+        let query = match args.next() {
+            Some(s) => s, 
+            None => return Err("No query string specified")
+        };
+        let file_path = match args.next() {
+            Some(fp) => fp,
+            None => return Err("No file path specified")
+        };
+        let mut ignore_case = env::var("IGNORE_CASE").is_ok();
+
+        match args.next() {
+            Some(ic) => {
+                let ic = &ic[..];
+                match ic {
+                    "true" => ignore_case = true,
+                    "false" => ignore_case = false,
+                    other => return Err("Only 2 valid options true/false
+                        for ignoring case")
+                }
+            },
+            None => (),
         }
 
         Ok(
